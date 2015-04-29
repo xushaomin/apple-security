@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.redisson.Redisson;
-import org.redisson.core.RMap;
 import org.springframework.util.Assert;
 
 import com.appleframework.security.auth.token.AuthenticationKeyGenerator;
@@ -33,9 +32,9 @@ public class InRedisTokenStore implements TokenStore {
 
 	private static final int DEFAULT_FLUSH_INTERVAL = 1000;
 
-	private RMap<String, AccessToken> accessTokenStore;
+	private Map<String, AccessToken> accessTokenStore = new ConcurrentHashMap<String, AccessToken>();;
 
-	private RMap<String, AccessToken> authenticationToAccessTokenStore;
+	private Map<String, AccessToken> authenticationToAccessTokenStore = new ConcurrentHashMap<String, AccessToken>();;
 
 	private Map<String, Collection<AccessToken>> userNameToAccessTokenStore = new ConcurrentHashMap<String, Collection<AccessToken>>();
 
