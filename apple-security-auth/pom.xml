@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>apple-security</artifactId>
 		<groupId>com.appleframework.security</groupId>
-		<version>0.0.3.RELEASE</version>
+		<version>0.0.4.RELEASE</version>
 	</parent>
 	<artifactId>apple-security-auth</artifactId>
 	<name>apple-security-auth</name>
@@ -23,6 +23,11 @@
 		<dependency>
 			<groupId>com.appleframework.cache</groupId>
 			<artifactId>apple-cache-hazelcast</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.appleframework.cache</groupId>
+			<artifactId>apple-cache-redis</artifactId>
 		</dependency>
 			
 		<dependency>
