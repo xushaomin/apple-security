@@ -117,7 +117,9 @@ public class DefaultTokenServices implements TokenServices {
 		if (validitySeconds > 0) {
 			token.setExpiration(new Date(System.currentTimeMillis() + (validitySeconds * 1000L)));
 		}
-		token.setExpiration(new Date(System.currentTimeMillis() + (accessTokenValiditySeconds * 1000L)));
+		else {
+			token.setExpiration(new Date(System.currentTimeMillis() + (accessTokenValiditySeconds * 1000L)));
+		}
 		token.setRefreshToken(refreshToken);
 
 		return accessTokenEnhancer != null ? accessTokenEnhancer.enhance(token, authentication) : token;
@@ -137,8 +139,14 @@ public class DefaultTokenServices implements TokenServices {
 			return null;
 		}*/
 		int validitySeconds = getRefreshTokenValiditySeconds(authentication);
-		ExpiringRefreshToken refreshToken = new DefaultExpiringRefreshToken(UUID.randomUUID().toString(),
-				new Date(System.currentTimeMillis() + (validitySeconds * 1000L)));
+		Date expirationDate = null;
+		if (validitySeconds > 0) {
+			expirationDate = new Date(System.currentTimeMillis() + (validitySeconds * 1000L));
+		}
+		else {
+			expirationDate = new Date(System.currentTimeMillis() + (refreshTokenValiditySeconds * 1000L));
+		}
+		ExpiringRefreshToken refreshToken = new DefaultExpiringRefreshToken(UUID.randomUUID().toString(), expirationDate);
 		return refreshToken;
 	}
 
