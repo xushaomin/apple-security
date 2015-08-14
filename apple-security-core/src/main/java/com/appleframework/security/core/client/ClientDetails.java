@@ -20,6 +20,13 @@ public interface ClientDetails extends Serializable {
 	 * @return The client id.
 	 */
 	String getClientId();
+	
+	/**
+	 * The client name.
+	 * 
+	 * @return The client name.
+	 */
+	String getClientName();
 
 	/**
 	 * The resources that this client can access. Can be ignored by callers if empty.
