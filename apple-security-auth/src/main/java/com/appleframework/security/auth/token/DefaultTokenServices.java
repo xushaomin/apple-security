@@ -306,4 +306,45 @@ public class DefaultTokenServices implements TokenServices {
 		return reuseRefreshToken;
 	}
 	
+	
+	@Override
+	public void removeAccessToken(Authentication authentication) throws AuthenticationException {
+		AccessToken existingAccessToken = tokenStore.getAccessToken(authentication);
+		RefreshToken refreshToken = null;
+		if (existingAccessToken != null) {
+			if (existingAccessToken.getRefreshToken() != null) {
+				refreshToken = existingAccessToken.getRefreshToken();
+				// The token store could remove the refresh token when the
+				// access token is removed, but we want to
+				// be sure...
+				tokenStore.removeRefreshToken(refreshToken);
+			}
+			tokenStore.removeAccessToken(existingAccessToken);
+		}
+	}
+	
+	@Override
+	public void removeAccessToken(ClientDetails clientDetails, String refreshTokenValue) 
+			throws AuthenticationException {
+
+		if (!supportRefreshToken) {
+			throw new InvalidGrantException("Invalid refresh token: " + refreshTokenValue);
+		}
+
+		RefreshToken refreshToken = tokenStore.readRefreshToken(refreshTokenValue);
+		if (refreshToken == null) {
+			throw new InvalidGrantException("Invalid refresh token: " + refreshTokenValue);
+		}
+
+		Authentication authentication = tokenStore.readAuthenticationForRefreshToken(refreshToken);
+		String clientId = authentication.getClientDetails().getClientId();
+		if (clientId == null || !clientId.equals(clientDetails.getClientId())) {
+			throw new InvalidGrantException("Wrong client for this refresh token: " + refreshTokenValue);
+		}
+
+		// clear out any access tokens already associated with the refresh token.
+		tokenStore.removeAccessTokenUsingRefreshToken(refreshToken);
+		tokenStore.removeRefreshToken(refreshToken);
+	}
+	
 }

@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>apple-security</artifactId>
 		<groupId>com.appleframework.security</groupId>
-		<version>0.0.9.RELEASE</version>
+		<version>0.1.0.RELEASE</version>
 	</parent>
 	<artifactId>apple-security-core</artifactId>
 	<name>apple-security-core</name>

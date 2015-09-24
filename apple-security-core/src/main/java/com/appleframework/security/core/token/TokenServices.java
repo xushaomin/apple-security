@@ -67,6 +67,28 @@ public interface TokenServices {
 	 * @throws InvalidTokenException if the token isn't valid
 	 */
 	Authentication loadAuthentication(String accessToken) throws AuthenticationException, InvalidTokenException;
+	
+	
+	/**
+	 * Create an access token associated with the specified credentials.
+	 * @param authentication The credentials associated with the access token.
+	 * @return The access token.
+	 * @throws AuthenticationException If the credentials are inadequate.
+	 */
+	void removeAccessToken(Authentication authentication) throws AuthenticationException;
+	
+	/**
+	 * remove an access token. The authorization request should be used for 2 things (at least): to validate that the
+	 * client id of the original access token is the same as the one requesting the refresh, and to narrow the scopes
+	 * (if provided).
+	 * 
+	 * @param refreshToken The details about the refresh token.
+	 * @param tokenRequest The incoming token request.
+	 * @return The (new) access token.
+	 * @throws AuthenticationException If the refresh token is invalid or expired.
+	 */
+	public void removeAccessToken(ClientDetails clientDetails, String refreshTokenValue) 
+			throws AuthenticationException;
 
 
 }
