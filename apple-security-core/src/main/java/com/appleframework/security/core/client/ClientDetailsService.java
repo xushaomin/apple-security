@@ -16,6 +16,8 @@
 
 package com.appleframework.security.core.client;
 
+import java.util.List;
+
 import com.appleframework.security.core.exception.ClientRegistrationException;
 
 
@@ -34,5 +36,12 @@ public interface ClientDetailsService {
    * @throws ClientRegistrationException If the client account is locked, expired, disabled, or invalid for any other reason.
    */
   ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException;
+  
+  
+  /**
+   * find all clientl.
+   */
+  List<ClientDetails> findAll();
+
 
 }

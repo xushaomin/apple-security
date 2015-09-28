@@ -1,5 +1,7 @@
 package com.appleframework.security.auth.client;
 
+import java.util.List;
+
 import com.appleframework.security.auth.client.store.ClientDetailsStore;
 import com.appleframework.security.core.client.ClientDetails;
 import com.appleframework.security.core.client.ClientDetailsService;
@@ -25,5 +27,9 @@ public class DefaultClientDetailsService implements ClientDetailsService {
 		return clientDetailsStore.loadClientByClientId(clientId);
 	}
 
+	@Override
+	public List<ClientDetails> findAll() {
+		return clientDetailsStore.findAll();
+	}
 	
 }
