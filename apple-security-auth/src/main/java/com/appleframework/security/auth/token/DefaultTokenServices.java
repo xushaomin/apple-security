@@ -60,6 +60,23 @@ public class DefaultTokenServices implements TokenServices {
 	private ClientDetailsService clientDetailsService;
 	
 	private TokenEnhancer accessTokenEnhancer;
+	
+	public boolean isValidAccessToken(Authentication authentication) {
+		AccessToken existingAccessToken = tokenStore.getAccessToken(authentication);
+		if (existingAccessToken != null) {
+			if (existingAccessToken.isExpired()) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			return true;
+		}
+	}
+	
+	
 
 	@Override
 	public AccessToken createAccessToken(Authentication authentication) throws AuthenticationException {
@@ -241,6 +258,10 @@ public class DefaultTokenServices implements TokenServices {
 
 	public void setTokenStore(TokenStore tokenStore) {
 		this.tokenStore = tokenStore;
+	}
+	
+	public AccessToken getAccessToken(Authentication authentication) {
+		return tokenStore.getAccessToken(authentication);
 	}
 
 	public void setClientDetailsService(ClientDetailsService clientDetailsService) {
