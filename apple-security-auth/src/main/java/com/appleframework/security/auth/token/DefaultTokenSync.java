@@ -29,5 +29,9 @@ public class DefaultTokenSync implements TokenSync {
 			}
 		}
 	}
+
+	public void setTokenStore(TokenStore tokenStore) {
+		this.tokenStore = tokenStore;
+	}
 	
 }
