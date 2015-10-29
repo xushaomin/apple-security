@@ -29,7 +29,7 @@ import com.appleframework.security.core.exception.InvalidTokenException;
 public interface TokenServices {
 	
 	/**
-	 * 通过Authentication校验accessToken是否有效
+	 * valid accessToken
 	 * @param authentication The credentials associated with the access token.
 	 * @return The access token.
 	 * @throws AuthenticationException If the credentials are inadequate.
