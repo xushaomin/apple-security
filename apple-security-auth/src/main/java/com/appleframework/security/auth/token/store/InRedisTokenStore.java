@@ -206,8 +206,7 @@ public class InRedisTokenStore implements TokenStore {
 		return clientId + (userName==null ? "" : ":" + userName);
 	}
 
-	private void addToCollection(Map<String, Collection<AccessToken>> store, String key,
-			AccessToken token) {
+	private void addToCollection(Map<String, Collection<AccessToken>> store, String key, AccessToken token) {
 		if (!store.containsKey(key)) {
 			synchronized (store) {
 				if (!store.containsKey(key)) {
