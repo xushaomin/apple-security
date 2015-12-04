@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -35,7 +35,7 @@ import com.appleframework.security.core.utils.SerializationUtils;
  */
 public class JdbcTokenStore implements TokenStore {
 
-	private static final Log LOG = LogFactory.getLog(JdbcTokenStore.class);
+    protected static Logger logger = LoggerFactory.getLogger(JdbcTokenStore.class);
 
 	private static final String DEFAULT_ACCESS_TOKEN_INSERT_STATEMENT = "insert into oauth_access_token (token_id, token, authentication_id, user_name, client_id, authentication, refresh_token) values (?, ?, ?, ?, ?, ?, ?)";
 
@@ -115,12 +115,12 @@ public class JdbcTokenStore implements TokenStore {
 					}, key);
 		}
 		catch (EmptyResultDataAccessException e) {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Failed to find access token for authentication " + authentication);
+			if (logger.isDebugEnabled()) {
+				logger.debug("Failed to find access token for authentication " + authentication);
 			}
 		}
 		catch (IllegalArgumentException e) {
-			LOG.error("Could not extract access token for authentication " + authentication, e);
+			logger.error("Could not extract access token for authentication " + authentication, e);
 		}
 
 		if (accessToken != null
@@ -161,12 +161,12 @@ public class JdbcTokenStore implements TokenStore {
 			}, extractTokenKey(tokenValue));
 		}
 		catch (EmptyResultDataAccessException e) {
-			if (LOG.isInfoEnabled()) {
-				LOG.info("Failed to find access token for token " + tokenValue);
+			if (logger.isInfoEnabled()) {
+				logger.info("Failed to find access token for token " + tokenValue);
 			}
 		}
 		catch (IllegalArgumentException e) {
-			LOG.warn("Failed to deserialize access token for " + tokenValue, e);
+			logger.warn("Failed to deserialize access token for " + tokenValue, e);
 			removeAccessToken(tokenValue);
 		}
 
@@ -197,12 +197,12 @@ public class JdbcTokenStore implements TokenStore {
 					}, extractTokenKey(token));
 		}
 		catch (EmptyResultDataAccessException e) {
-			if (LOG.isInfoEnabled()) {
-				LOG.info("Failed to find access token for token " + token);
+			if (logger.isInfoEnabled()) {
+				logger.info("Failed to find access token for token " + token);
 			}
 		}
 		catch (IllegalArgumentException e) {
-			LOG.warn("Failed to deserialize authentication for " + token, e);
+			logger.warn("Failed to deserialize authentication for " + token, e);
 			removeAccessToken(token);
 		}
 
@@ -227,12 +227,12 @@ public class JdbcTokenStore implements TokenStore {
 			}, extractTokenKey(token));
 		}
 		catch (EmptyResultDataAccessException e) {
-			if (LOG.isInfoEnabled()) {
-				LOG.info("Failed to find refresh token for token " + token);
+			if (logger.isInfoEnabled()) {
+				logger.info("Failed to find refresh token for token " + token);
 			}
 		}
 		catch (IllegalArgumentException e) {
-			LOG.warn("Failed to deserialize refresh token for token " + token, e);
+			logger.warn("Failed to deserialize refresh token for token " + token, e);
 			removeRefreshToken(token);
 		}
 
@@ -263,12 +263,12 @@ public class JdbcTokenStore implements TokenStore {
 					}, extractTokenKey(value));
 		}
 		catch (EmptyResultDataAccessException e) {
-			if (LOG.isInfoEnabled()) {
-				LOG.info("Failed to find access token for token " + value);
+			if (logger.isInfoEnabled()) {
+				logger.info("Failed to find access token for token " + value);
 			}
 		}
 		catch (IllegalArgumentException e) {
-			LOG.warn("Failed to deserialize access token for " + value, e);
+			logger.warn("Failed to deserialize access token for " + value, e);
 			removeRefreshToken(value);
 		}
 
@@ -292,8 +292,8 @@ public class JdbcTokenStore implements TokenStore {
 					clientId);
 		}
 		catch (EmptyResultDataAccessException e) {
-			if (LOG.isInfoEnabled()) {
-				LOG.info("Failed to find access token for clientId " + clientId);
+			if (logger.isInfoEnabled()) {
+				logger.info("Failed to find access token for clientId " + clientId);
 			}
 		}
 		accessTokens = removeNulls(accessTokens);
@@ -309,8 +309,8 @@ public class JdbcTokenStore implements TokenStore {
 					userName);
 		}
 		catch (EmptyResultDataAccessException e) {
-			if (LOG.isInfoEnabled())
-				LOG.info("Failed to find access token for userName " + userName);
+			if (logger.isInfoEnabled())
+				logger.info("Failed to find access token for userName " + userName);
 		}
 		accessTokens = removeNulls(accessTokens);
 
@@ -325,8 +325,8 @@ public class JdbcTokenStore implements TokenStore {
 					userName, clientId);
 		}
 		catch (EmptyResultDataAccessException e) {
-			if (LOG.isInfoEnabled()) {
-				LOG.info("Failed to find access token for clientId " + clientId + " and userName " + userName);
+			if (logger.isInfoEnabled()) {
+				logger.info("Failed to find access token for clientId " + clientId + " and userName " + userName);
 			}
 		}
 		accessTokens = removeNulls(accessTokens);
