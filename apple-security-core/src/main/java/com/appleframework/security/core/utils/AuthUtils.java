@@ -9,8 +9,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.springframework.util.StringUtils;
-
 /**
  * @author Ryan Heaton
  * @author Dave Syer

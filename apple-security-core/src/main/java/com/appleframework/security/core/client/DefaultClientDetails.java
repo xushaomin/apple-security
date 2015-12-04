@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
-import org.springframework.util.StringUtils;
-
 import com.appleframework.security.core.auth.GrantedAuthority;
+import com.appleframework.security.core.utils.StringUtils;
 
 /**
  * @author Cruise.Xu

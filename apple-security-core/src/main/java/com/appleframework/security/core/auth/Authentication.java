@@ -13,5 +13,7 @@ public interface Authentication {
 	public ClientDetails getClientDetails();
 
 	public void setClientDetails(ClientDetails clientDetails);
+	
+	public boolean isClientOnly();
 }
 

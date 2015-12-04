@@ -48,5 +48,10 @@ public class DefaultAuthentication implements Authentication, Serializable {
 	public static DefaultAuthentication creat(User user, ClientDetails clientDetails) {
 		return new DefaultAuthentication(user, clientDetails);
 	}
+
+	@Override
+	public boolean isClientOnly() {
+		return user == null;
+	}
 	
 }

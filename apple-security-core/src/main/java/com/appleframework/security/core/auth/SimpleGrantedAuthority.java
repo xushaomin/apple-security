@@ -1,7 +1,7 @@
 package com.appleframework.security.core.auth;
 
-import org.springframework.util.Assert;
- 
+import com.appleframework.security.core.utils.Assert;
+
 /**
  * Basic concrete implementation of a {@link GrantedAuthority}.
  *
@@ -18,7 +18,7 @@ public final class SimpleGrantedAuthority implements GrantedAuthority {
 	private final String role;
  
     public SimpleGrantedAuthority(String role) {
-        Assert.hasText(role, "A granted authority textual representation is required");
+    	Assert.hasText(role, "A granted authority textual representation is required");
         this.role = role;
     }
  

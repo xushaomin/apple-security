@@ -62,7 +62,6 @@ public class InHazelcastTokenStore implements TokenStore {
 	
 	private HazelcastInstance hazelcastInstance;
 
-	
 	public void init() {
 		
 		accessTokenStore = hazelcastInstance.getMap("accessTokenStore");
