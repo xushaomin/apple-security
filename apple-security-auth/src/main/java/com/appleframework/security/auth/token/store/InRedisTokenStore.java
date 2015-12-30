@@ -142,11 +142,18 @@ public class InRedisTokenStore implements TokenStore {
 	public AccessToken getAccessToken(Authentication authentication) {
 		String key = authenticationKeyGenerator.extractKey(authentication);
 		AccessToken accessToken = authenticationToAccessTokenStore.get(key);
-		if (accessToken != null
-				&& !key.equals(authenticationKeyGenerator.extractKey(readAuthentication(accessToken.getValue())))) {
+		if(null == accessToken)
+			return null;
+		Authentication existAuthentication = readAuthentication(accessToken.getValue());
+		String existKey = null;
+		if(null != existAuthentication)
+			existKey = authenticationKeyGenerator.extractKey(existAuthentication);
+		
+		if (accessToken != null ){
 			// Keep the stores consistent (maybe the same user is represented by this authentication but the details
 			// have changed)
-			storeAccessToken(accessToken, authentication);
+			if(null == existKey || !key.equals(existKey))
+				storeAccessToken(accessToken, authentication);
 		}
 		return accessToken;
 	}
