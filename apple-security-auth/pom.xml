@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>apple-security</artifactId>
 		<groupId>com.appleframework.security</groupId>
-		<version>0.1.3.RELEASE</version>
+		<version>0.1.4.RELEASE</version>
 	</parent>
 	<artifactId>apple-security-auth</artifactId>
 	<name>apple-security-auth</name>
