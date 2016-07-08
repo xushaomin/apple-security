@@ -42,6 +42,15 @@ public interface ClientDetailsService {
    * find all clientl.
    */
   List<ClientDetails> findAll();
-
+  
+  
+  /**
+   * Load a client by the additional information.
+   *
+   * @param additionalInformation The additional information.
+   * @return The additional information (never null).
+   * @throws ClientRegistrationException If the client account is locked, expired, disabled, or invalid for any other reason.
+   */
+  ClientDetails loadClientByAdditionalInformation(String additionalInformation) throws ClientRegistrationException;
 
 }

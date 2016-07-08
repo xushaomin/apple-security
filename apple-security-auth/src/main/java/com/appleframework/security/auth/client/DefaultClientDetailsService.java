@@ -31,5 +31,12 @@ public class DefaultClientDetailsService implements ClientDetailsService {
 	public List<ClientDetails> findAll() {
 		return clientDetailsStore.findAll();
 	}
-	
+
+
+	@Override
+	public ClientDetails loadClientByAdditionalInformation(String additionalInformation)
+			throws ClientRegistrationException {
+		return null;
+	}
+		
 }
