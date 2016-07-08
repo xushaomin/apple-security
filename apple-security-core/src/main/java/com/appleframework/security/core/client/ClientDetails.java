@@ -101,5 +101,12 @@ public interface ClientDetails extends Serializable {
 	 * @return the refresh token validity period
 	 */
 	Integer getRefreshTokenValiditySeconds();
+	
+	/**
+	 * The additional information.
+	 * 
+	 * @return additional information
+	 */
+	public String getAdditionalInformation();
 
 }

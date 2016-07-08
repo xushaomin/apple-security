@@ -4,9 +4,9 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>apple-security</artifactId>
 		<groupId>com.appleframework.security</groupId>
-		<version>0.1.4.RELEASE</version>
+		<artifactId>apple-security</artifactId>
+		<version>0.1.5.RELEASE</version>
 	</parent>
 	<artifactId>apple-security-auth</artifactId>
 	<name>apple-security-auth</name>

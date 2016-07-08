@@ -50,6 +50,8 @@ public class DefaultClientDetails implements ClientDetails {
 	 * global default will be applied by the token services.
 	 */
 	private Integer refreshTokenValidity;
+	
+	private String additionalInformation;
 
 	/**
 	 * The client is trusted or not. If it is trust, will skip approve step
@@ -220,6 +222,14 @@ public class DefaultClientDetails implements ClientDetails {
 	@Override
 	public Collection<GrantedAuthority> getAuthoritiesCollection() {
 		return new ArrayList<GrantedAuthority>();
+	}
+
+	public String getAdditionalInformation() {
+		return additionalInformation;
+	}
+
+	public void setAdditionalInformation(String additionalInformation) {
+		this.additionalInformation = additionalInformation;
 	}
 
 	@Override
