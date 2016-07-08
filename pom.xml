@@ -29,12 +29,14 @@
 				<groupId>com.appleframework.cache</groupId>
 				<artifactId>apple-cache-hazelcast</artifactId>
 				<version>${cache.version}</version>
+				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
 				<groupId>com.appleframework.cache</groupId>
 				<artifactId>apple-cache-redis</artifactId>
 				<version>${cache.version}</version>
+				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
@@ -138,11 +140,11 @@
 			<distributionManagement>
 				<repository>
 					<id>apple-releases</id>
-					<url>http://mvnrepo.appleframework.com/nexus/content/repositories/releases/</url>
+					<url>http://mvnrepo.appleframework.com:8081/nexus/content/repositories/releases/</url>
 				</repository>
 				<snapshotRepository>
 					<id>apple-snapshots</id>
-					<url>http://mvnrepo.appleframework.com/nexus/content/repositories/snapshots/</url>
+					<url>http://mvnrepo.appleframework.com:8081/nexus/content/repositories/snapshots/</url>
 				</snapshotRepository>
 			</distributionManagement>
 		</profile>
